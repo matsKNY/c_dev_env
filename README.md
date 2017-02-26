@@ -2,21 +2,23 @@
 ## Abstract  
 This repository aims at automating the installation and setting up process of the development environment I am using when it comes to code in C and C++ programming languages.  
 Two ways of automation have been considered:  
-    * **Docker**: supplying a Dockerfile, and the related files, to build a Docker image containing the development environment.  
-    It is a convenient way when your user account is not a sudoer/has not root priviledges (given that Docker is installed, which is ever more likely, and that your user account may run it), or when you do not want/cannot install new software on the host machine;  
-    * **Script**: supplying a Bash script, and the related files, to install the development environment on the host machine.  
+- **Docker**: supplying a Dockerfile, and the related files, to build a Docker image containing the development environment.  
+It is a convenient way when your user account is not a sudoer/has not root priviledges (given that Docker is installed, which is ever more likely, and that your user account may run it), or when you do not want/cannot install new software on the host machine;  
+- **Script**: supplying a Bash script, and the related files, to install the development environment on the host machine.  
+
 ## Components of the development environment  
 The development environment to be installed is composed of the hereinbelow software components:  
-    * **Bash** configuration files: the *.bashrc*, *.bash_aliases* and *.ls_colors* files;  
-    * **gcc** and **g++**: the "common" Unix compilation toolchain for the C and C++ programming languages;  
-    * **Make** and **CMake**: a set of compilation automation tools;  
-    * **Valgrind**: a tool aiming at checking memory usage and handling;  
-    * **git**: a versioning tool;  
-    * **Python**: quite handy for scripting and quick proof-of-concept implementation;  
-    * **vim**: the VI iMproved text editor, along with several plugins:  
-     * **YouCompleteMe**: an autocompletion plugin, with a lot of advanced features such as on-the-fly syntax checking;  
-     * **Goyo**: a plugin to make **vim** a refined, sober and clean text editor to take notes rather than produce lines of code;  
-     * **Limelight**: a "focuser" which highlights only the current paragraph. To be used together with **Goyo** to take notes efficiently.  
+- **Bash** configuration files: the *.bashrc*, *.bash_aliases* and *.ls_colors* files;  
+- **gcc** and **g++**: the "common" Unix compilation toolchain for the C and C++ programming languages;  
+- **Make** and **CMake**: a set of compilation automation tools;  
+- **Valgrind**: a tool aiming at checking memory usage and handling;  
+- **git**: a versioning tool;  
+- **Python**: quite handy for scripting and quick proof-of-concept implementation;  
+- **vim**: the VI iMproved text editor, along with several plugins:  
+ - **YouCompleteMe**: an autocompletion plugin, with a lot of advanced features such as on-the-fly syntax checking;  
+ - **Goyo**: a plugin to make **vim** a refined, sober and clean text editor to take notes rather than produce lines of code;  
+ - **Limelight**: a "focuser" which highlights only the current paragraph. To be used together with **Goyo** to take notes efficiently.  
+ 
 ## How to
 The first step is to clone the current repository to the host machine:  
 ``` bash
