@@ -3,7 +3,7 @@
 This repository aims at automating the installation and setting up process of the development environment I am using when it comes to code in C and C++ programming languages.  
 Two ways of automation have been considered:  
 - **Docker**: supplying a Dockerfile, and the related files, to build a Docker image containing the development environment.  
-It is a convenient way when your user account is not a sudoer/has not root priviledges (given that Docker is installed, which is ever more likely, and that your user account may run it), or when you do not want/cannot install new software on the host machine;  
+It is a convenient way when your user account is not a sudoer/has not root privileges (given that Docker is installed, which is ever more likely, and that your user account may run it), or when you do not want/cannot install new software on the host machine;  
 - **Script**: supplying a Bash script, and the related files, to install the development environment on the host machine.  
 
 ## Components of the development environment  
@@ -55,4 +55,13 @@ user@host $> docker volume list
 user@host $> docker volume rm "volume_id"
 ```  
 ### How to - Script way
-**TODO**
+If you opt for the script way, the first step is also to make sure that the current directory is the one you have just cloned:  
+``` bash
+user@host $> cd c_dev_env
+```  
+Then, make sure that the script is executable, and run it (it is very likely that sudo/root privileges will be required):  
+``` bash
+user@host $> chmod u+x install.sh
+user@host $> (sudo) ./install.sh
+```  
+The global installation process might take up to 30-40 minutes if all the components have to be downloaded/compiled/installed.
