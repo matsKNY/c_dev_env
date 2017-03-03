@@ -36,7 +36,7 @@ set colorcolumn=80
 filetype off 
 
 " Setting the runtime path to include Vundle, and initializing it.
-set rtp+=/root/.vim/bundle/Vundle.vim
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Letting Vundle manage itself (this is required).
