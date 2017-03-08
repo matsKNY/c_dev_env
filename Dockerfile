@@ -37,6 +37,7 @@ RUN apt-get update && \
 # Copying the bashrc, the bash_aliases, ls_colors and vimrc files.
 COPY bashrc /root/.bashrc
 COPY bash_aliases /root/.bash_aliases
+COPY git_template /root/.git_template
 COPY ls_colors /root/.ls_colors
 COPY vimrc /root/.vimrc
 

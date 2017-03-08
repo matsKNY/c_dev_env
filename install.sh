@@ -19,6 +19,7 @@ apt-get install build-essential -y && \
 # Copying the bashrc, the bash_aliases, ls_colors and vimrc files.
 cp bashrc ~/.bashrc
 cp bash_aliases ~/.bash_aliases
+cp git_template ~/.git_template
 cp ls_colors ~/.ls_colors
 cp vimrc ~/.vimrc
 
