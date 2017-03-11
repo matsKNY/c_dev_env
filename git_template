@@ -1,14 +1,17 @@
 ![]
 
 Scale: 
-    - Not Concerned     (  NC);
-    - None              (NONE);
-    - Failed            (FAIL);
-    - In Development    ( DEV);
-    - Bug Fixing        ( FIX);
-    - Passed            (PASS);
+    - Not Concerned             (   NC);
+    - Not At This Stage Yet     (NATSY);
+    - None                      ( NONE);
+    - In Development            (  DEV);
+    - Bug Fixing                (  FIX);
+    - Failed                    ( FAIL);
+    - Passed                    ( PASS);
+    - Finished                  (FNSHD).
 
 State of the feature associated with this commit:
+    Source code         :
     Compilation         : 
     Execution           : 
     Unitary Testing     : 
