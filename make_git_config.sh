@@ -33,7 +33,9 @@ Help file - make_git_config.sh:
 
 # Defining the variable which contains the path where the configuration file
 # should be created.
-PATH="$(cd ; pwd)/.gitconfig"
+PATH="$(cd ; pwd)"
+CONFIG_PATH="${PATH}/.gitconfig"
+TEMPLATE_PATH="${PATH}/.git_template"
 
 # Defining the variable which must be set thanks to the options.
 EDITOR=""
@@ -99,9 +101,11 @@ echo "
 	diff = true
 	status = true
 	ui = true
+[commit]
+    template = ${TEMPLATE_PATH}
 [core]
 	editor = ${EDITOR}
 [user]
 	name = ${NAME}
 	email = ${MAIL}
-" > "$PATH"
+" > "$CONFIG_PATH"
