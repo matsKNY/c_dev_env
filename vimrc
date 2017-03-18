@@ -66,8 +66,16 @@ augroup vim_mappings
     " Text editing mappings
     inoremap <esc> <nop>
     inoremap jk <esc>
+    inoremap ¤ <del>
+    inoremap ù %
+    inoremap § <down>
+    inoremap % <left>
+    inoremap µ <right>
+    inoremap £ <up>
+    " New lines mappings
     nnoremap <leader>o o<esc>^
     nnoremap <leader>O O<esc>^
+    " Text formating mappings
     inoremap <c-u> <esc>bveUea
     " VimRC editing mappings
     nnoremap <leader>ev :vsplit $MYVIMRC<cr>
@@ -104,6 +112,13 @@ augroup END
 augroup filetype_vimscript
     autocmd!
     autocmd Filetype vim setlocal foldmethod=marker
+augroup END
+" <------- }}}
+
+" Filetype - Bash -------> {{{
+augroup filetype_bash
+    autocmd!
+    autocmd Filetype bash,sh inoremap <c-e> <esc>bi"$<esc>ea"
 augroup END
 " <------- }}}
 
