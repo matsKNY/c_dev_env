@@ -149,3 +149,18 @@ augroup status_line
     set statusline+=%3*\ \ %m%r\                              " Modified? Readonly?
 augroup END
 " <------- }}}
+"
+" Custom commands and functions -------> {{{
+augroup status_line
+    autocmd!
+
+    " Function and associated command to open a PDF from its path in Vim:
+    function! Function_OpenPDF()
+        let line=getline('.')
+        execute "!evince " . line
+    endfunction
+    "
+    command! OpenPDF call Function_OpenPDF()
+
+augroup END
+" <------- }}}
