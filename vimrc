@@ -20,6 +20,7 @@ augroup indent_settings
     set wrap
     set tabstop=4
     set shiftwidth=4
+    set textwidth=80
     set colorcolumn=80
 augroup END
 " <------- }}}
@@ -44,6 +45,10 @@ augroup vundle_plugins
     Plugin 'junegunn/goyo.vim'
     " Managing the limelight plugin.
     Plugin 'junegunn/limelight.vim'
+    " Managing the org-mode plugin.
+    Plugin 'jceb/vim-orgmode.git'
+    " Managing the speed-dating plugin.
+    Plugin 'tpope/vim-speeddating.git'
 
     " Terminating Vundle.
     call vundle#end()
@@ -66,7 +71,7 @@ augroup vim_mappings
     " Text editing mappings
     inoremap <esc> <nop>
     inoremap jk <esc>
-    inoremap ¤ <del>
+    inoremap œ <del>
     inoremap ù %
     inoremap § <down>
     inoremap % <left>
