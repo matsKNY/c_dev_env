@@ -72,6 +72,7 @@ augroup vim_mappings
     inoremap <esc> <nop>
     inoremap jk <esc>
     inoremap œ <del>
+    inoremap “ œ
     inoremap ù %
     inoremap § <down>
     inoremap % <left>
@@ -151,7 +152,7 @@ augroup END
 " <------- }}}
 "
 " Custom commands and functions -------> {{{
-augroup status_line
+augroup functions_and_commands
     autocmd!
 
     " Function and associated command to open a PDF from its path in Vim:
@@ -161,6 +162,14 @@ augroup status_line
     endfunction
     "
     command! OpenPDF call Function_OpenPDF()
+
+    " Function to format a range of line according to the given line width.
+    function! FormatLineWidth(width) range
+        let old_width=&textwidth
+        let &textwidth=a:width
+        execute "normal gv gq"
+        let &textwidth=old_width
+    endfunction
 
 augroup END
 " <------- }}}
