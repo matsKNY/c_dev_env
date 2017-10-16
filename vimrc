@@ -6,6 +6,7 @@ augroup general_vim_settings
     set ignorecase
     set showmode
     set backspace=indent,eol,start
+    set encoding=utf-8
     syntax on
 augroup END
 " <------- }}}
