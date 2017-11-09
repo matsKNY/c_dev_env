@@ -1,20 +1,27 @@
-![]
+[]
 
-Scale: 
-    - Not Concerned             (   NC);
-    - Not At This Stage Yet     (NATSY);
-    - None                      ( NONE);
-    - In Development            (  DEV);
-    - Bug Fixing                (  FIX);
-    - Failed                    ( FAIL);
-    - Passed                    ( PASS);
-    - Finished                  (FNSHD).
+%%% Code status
+ |
+ ----------> In development
+ |
+ ----------> Not compiling
+ |
+ ----------> Compiling
+      |
+      v
 
-State of the feature associated with this commit:
-    Source code         :
-    Compilation         : 
-    Execution           : 
-    Unitary Testing     : 
-    Integration Testing : 
-    Documentation       : 
+%%% Level of test
+ |
+ ----------> Not executed
+ |
+ ----------> Hand-tested
+ |
+ ----------> Automated test suite
+      |
+      v
 
+%%% Comments
+ |
+ ------
+      |
+      v
