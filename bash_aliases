@@ -1,4 +1,5 @@
-alias lsa="ls -al"
+alias ls="ls --color=auto -l"
+alias lsa="ls -a"
 alias aptget="sudo apt-get install"
 alias aptup="sudo apt-get update"
 alias gita="git add"
