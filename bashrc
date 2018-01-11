@@ -51,7 +51,7 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='${debian_chroot:+(debian_chroot)} \[\033[01;34m\]\[\033[04;34m\]\u@\h:\[\033[00m\]\[\033[00m\]\[\033[00;36m\] \W => \[\033[00m\]\[\033[00;37m\]'
+    PS1='${debian_chroot:+(debian_chroot)}\n\r\[\033[34m\]\u\[\033[00m\]@\[\033[01;34m\]\h\[\033[00m\]: \t | \[\033[1;30m\]\w\[\033[00m\]\n\r        |\n\r        ↳ \[\033[00;37m\]'
 else
     PS1='${debian_chroot:+(debian_chroot)}\u@\h:\w\$ '
 fi
@@ -102,3 +102,15 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+# Vim edition mode in Bash! With the AltGr+J key combination remapped to 
+# Escape to navigate between normal and insertion modes.
+set -o vi
+xmodmap -e "keycode  44 = j J j J Escape"
+# To revert the mapping, uncomment the below line.
+#xmodmap -e "keycode  44 = j J j J dead_hook dead_horn"
+
+# Remapping the keyboard in order to assign œ to AltGr+o and Œ to Shift+AltGr+o.
+xmodmap -e "keycode  32 = o O o O oe OE"
+# To revert the mapping, uncomment the below line.
+#xmodmap -e "keycode  32 = o O o O oslash Oslash"
