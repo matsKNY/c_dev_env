@@ -50,6 +50,14 @@ augroup vundle_plugins
     Plugin 'jceb/vim-orgmode.git'
     " Managing the speed-dating plugin.
     Plugin 'tpope/vim-speeddating.git'
+    " Managing the Universal Text Linking plugin.
+    Plugin 'vim-scripts/utl.vim'
+    " Managing the repeat plugin.
+    Plugin 'tpope/vim-repeat'
+    " Managing the tagbar plugin.
+    Plugin 'majutsushi/tagbar'
+    " Managing the SyntaxRange plugin.
+    Plugin 'vim-scripts/SyntaxRange'
 
     " Terminating Vundle.
     call vundle#end()
@@ -72,8 +80,8 @@ augroup vim_mappings
     " Text editing mappings
     inoremap <esc> <nop>
     inoremap jk <esc>
-    inoremap œ <del>
-    inoremap “ œ
+    inoremap ² <del>
+    inoremap ¬ ²
     inoremap ù %
     inoremap § <down>
     inoremap % <left>
@@ -90,6 +98,8 @@ augroup vim_mappings
     " Clipboard mappings
     vnoremap <C-c> "+y
     inoremap <C-v> <esc>"+pi
+    " Plugin-related remappings.
+    nmap <F8> :TagbarToggle<cr>
 augroup END
 " <------- }}}
 
