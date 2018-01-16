@@ -36,7 +36,7 @@ apt-get install build-essential -y && \
 # vim-orgmode.                                                                  
 git clone https://github.com/universal-ctags/ctags.git                          
 cd ctags
-./autogen.sh && ./configure && make install
+./autogen.sh && ./configure && make && make install
 cd ..
 rm -fr ctags
 
