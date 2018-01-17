@@ -100,6 +100,14 @@ augroup vim_mappings
     inoremap <C-v> <esc>"+pi
     " Plugin-related remappings.
     nmap <F8> :TagbarToggle<cr>
+    " Laboratory notebook-related remappings.
+    nmap <F2> :call OpenLab("notebook.org")<cr>
+    nmap <F3> :call OpenLab("todo.org")<cr>
+    nmap <F4> :call OpenLab("references.org")<cr>
+    nmap <F5> :call OpenLab("knowledge.org")<cr>
+    nmap <F6> :call OpenLab("idea.org")<cr>
+    nmap <F7> :call OpenLab("writing.org")<cr>
+    nmap <F12> :! push_lab_notebook<cr>
 augroup END
 " <------- }}}
 
@@ -230,6 +238,15 @@ augroup functions_and_commands
             let flags = "cW"
         endwhile
 
+    endfunction
+
+    " Simple function aiming at opening a file from the laboratory notebook.
+    " Arguments :
+    "   file : the basename of the file to open.
+    function! OpenLab(file)
+        let home_path = fnamemodify(expand("$HOME"), ":p:h")
+        let file_path = home_path . "/.lab_notebook/" . a:file
+        execute "e " . file_path
     endfunction
 
 augroup END

@@ -114,3 +114,6 @@ xmodmap -e "keycode  44 = j J j J Escape"
 xmodmap -e "keycode  32 = o O o O oe OE"
 # To revert the mapping, uncomment the below line.
 #xmodmap -e "keycode  32 = o O o O oslash Oslash"
+
+# Defining the path to the laboratory notebook.
+export LAB_NOTEBOOK="${HOME}/.lab_notebook"

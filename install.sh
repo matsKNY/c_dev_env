@@ -47,6 +47,13 @@ install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 git_template "$DIR_INSTALL"
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 ls_colors "$DIR_INSTALL"/.ls_colors
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 vimrc "$DIR_INSTALL"/.vimrc
 
+# Creating the directory dedicated to the laboratory notebook.
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.lab_notebook
+
+# Installing the push/pull scripts associated with the laboratory notebook.
+install -o "root" -g "root" -m 755 push_lab_notebook.sh /usr/local/bin/push_lab_notebook
+install -o "root" -g "root" -m 755 pull_lab_notebook.sh /usr/local/bin/pull_lab_notebook
+
 # Copying the template of the extra configuration files needed by YCM.
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/sample_ycm
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 sample_ycm/* "$DIR_INSTALL"/.vim/sample_ycm
