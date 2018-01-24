@@ -87,6 +87,9 @@ augroup vim_mappings
     inoremap % <left>
     inoremap µ <right>
     inoremap £ <up>
+    " Unicode-related mappings.
+    inoremap <C-u> <C-V>
+    inoremap <C-l> <C-V>u2937 
     " New lines mappings
     nnoremap <leader>o o<esc>^
     nnoremap <leader>O O<esc>^
