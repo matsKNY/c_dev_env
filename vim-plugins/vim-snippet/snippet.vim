@@ -3,7 +3,9 @@ let s:dict_repl = {}
 
 let s:cur_repl = 0
 
-function! SnippetInclusion(name)
+let s:map_save = []
+
+function! s:SnippetInclusion(name)
     set hidden
 
     let path = fnamemodify("~/.vim/snippet", ":p:h") . "/" . a:name
@@ -45,28 +47,28 @@ function! SnippetInclusion(name)
     set nohidden
 endfunction
 
-function! ReplacementExtract(placeholder, id)
+function! s:ReplacementExtract(placeholder, id)
     let s:dict_repl[a:id] = a:placeholder
     return '#!' . a:placeholder . '!#'
 endfunction
 
-function! SnippetSetup()
+function! s:SnippetSetup()
     let repl_count = 1
     while (repl_count <= s:nb_repl)
         silent call search('#![^#!@]\+@[^#!@]\+!#')
 
-        s/#!\([^#!@]\+\)@\([1-9]\)!#/\=ReplacementExtract(submatch(1), submatch(2))/
+        s/#!\([^#!@]\+\)@\([1-9]\)!#/\=s:ReplacementExtract(submatch(1), submatch(2))/
 
         let repl_count = repl_count + 1
     endwhile
 endfunction
 
-function! SnippetCursor(replacement_id)
+function! s:SnippetCursor(replacement_id)
     let search_pattern = '#!' . s:dict_repl[a:replacement_id] . '!#'
     silent call search(search_pattern, "w")
 endfunction
 
-function! SnippetHighlightOn(replacement_id)
+function! s:SnippetHighlightOn(replacement_id)
     execute "normal! gg"
     silent call search('#![^#!]\+!#')
     let first_line = line('.') - 1
@@ -98,14 +100,19 @@ function! SnippetHighlightOn(replacement_id)
     endif
 endfunction
 
+function! s:SnippetHighlightOff()
+    execute "match"
+    execute "2match"
+endfunction
+
 function! NextReplacement()
-    nunmap <Tab>
+    silent! nunmap <Tab>
     
     let s:cur_repl = s:cur_repl + 1
     if (s:cur_repl > s:nb_repl)
         silent call SnippetTerm()
     else
-        silent call SnippetReplacement()
+        silent call s:SnippetReplacement()
     endif
 endfunction
 
@@ -118,12 +125,12 @@ function! DoReplacement()
     augroup END
 
     execute "stopinsert"
-    silent call SnippetCursor(s:cur_repl)
+    silent call s:SnippetCursor(s:cur_repl)
 
     let cursor_snippet = col('.')
     execute "normal! ^"
     let cursor_linestart = col('.')
-    silent call SnippetCursor(s:cur_repl)
+    silent call s:SnippetCursor(s:cur_repl)
 
     execute "normal! vf#d"
     if (cursor_snippet == cursor_linestart)
@@ -134,9 +141,9 @@ function! DoReplacement()
 
 endfunction
 
-function! SnippetReplacement()
-    silent call SnippetHighlightOn(s:cur_repl)
-    silent call SnippetCursor(s:cur_repl)
+function! s:SnippetReplacement()
+    silent call s:SnippetHighlightOn(s:cur_repl)
+    silent call s:SnippetCursor(s:cur_repl)
 
     augroup snippet_replacement
         autocmd!
@@ -149,17 +156,45 @@ function! SnippetInit(name)
     let s:dict_repl  = {}
     let s:cur_repl   = 0
 
-    silent call SnippetInclusion(a:name)
-    silent call SnippetSetup()
+    if (!empty(maparg('<Esc>', "i", 0, 1)))
+        call add(s:map_save, maparg('<Esc>', "i", 0, 1))
+    endif
+    inoremap <silent> <Esc> <Esc>:call SnippetTerm()<CR>
+
+    if (!empty(maparg('<Esc>', "n", 0, 1)))
+        call add(s:map_save, maparg('<Esc>', "n", 0, 1))
+    endif
+    nnoremap <silent> <Esc> <Esc>:call SnippetTerm()<CR>
+
+    if (!empty(maparg('<Tab>', "n", 0, 1)))
+        call add(s:map_save, maparg('<Tab>', "n", 0, 1))
+    endif
+
+    silent call s:SnippetInclusion(a:name)
+    silent call s:SnippetSetup()
 
     if (s:nb_repl > 0)
         let s:cur_repl = 1
-        silent call SnippetReplacement()
+        silent call s:SnippetReplacement()
     endif
 endfunction
 
 function! SnippetTerm()
+    silent! nunmap <Tab>
+    silent! nunmap <Esc>
+    silent! iunmap <Esc>
+
+    for item in s:map_save
+        let mapping = item['mode'] 
+        let mapping = mapping . (item['noremap'] == 1 ? 'noremap ' : 'map ')
+        let mapping = mapping . item['lhs'] . ' ' . item['rhs']
+        
+        execute mapping
+    endfor
+
     augroup snippet_replacement
         autocmd!
     augroup END
+
+    silent call s:SnippetHighlightOff()
 endfunction
