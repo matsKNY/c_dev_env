@@ -55,8 +55,16 @@ install -o "root" -g "root" -m 755 push_lab_notebook.sh /usr/local/bin/push_lab_
 install -o "root" -g "root" -m 755 pull_lab_notebook.sh /usr/local/bin/pull_lab_notebook
 
 # Copying the template of the extra configuration files needed by YCM.
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/sample_ycm
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 sample_ycm/* "$DIR_INSTALL"/.vim/sample_ycm
+
+# Installing the "vim-snippet" plugin.
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/plugin
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 vim-plugins/vim-snippet/snippet.vim "$DIR_INSTALL"/.vim/plugin
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/snippet
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/snippet/C
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 vim-plugins/vim-snippet/snippet/C/* "$DIR_INSTALL"/.vim/snippet/C
 
 # Creating Vim's bundle directory.
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/bundle/
