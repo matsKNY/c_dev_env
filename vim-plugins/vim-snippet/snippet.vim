@@ -153,7 +153,7 @@ function! s:SnippetHighlightOn(replacement_id)
     " grey shade.
     if (curr_repl < last_repl)
         let index_repl = curr_repl + 1
-        let highlight_remaining = '/\%>' . first_line . 'l'
+        let highlight_remaining = '/\%>' . first_line . 'l\('
 
         " Aggregating the remaining placeholders.
         while (index_repl < last_repl)
@@ -162,7 +162,7 @@ function! s:SnippetHighlightOn(replacement_id)
             let index_repl = index_repl + 1
         endwhile
         let highlight_remaining = highlight_remaining . s:dict_repl[last_repl]
-        let highlight_remaining = highlight_remaining . '\%<' . last_line . 'l/'
+        let highlight_remaining = highlight_remaining . '\)\%<' . last_line . 'l/'
 
         " Applying highlighting.
         execute '2match DiffChange ' . highlight_remaining
