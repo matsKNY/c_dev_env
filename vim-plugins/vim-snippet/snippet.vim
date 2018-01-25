@@ -220,14 +220,15 @@ function! DoReplacement()
     execute "stopinsert"
     silent call s:SnippetCursor(s:cur_repl)
 
-    " If the placeholder starts a line, then an additional space must be
-    " inserted in front of the placeholder to comply with the indentation.
-    " To determine whether the placeholder starts a line, comparing the columns
-    " of the first character of the placeholder and of the first character of
-    " the line.
+    " If the placeholder is the only word of the line, then an additional space
+    " must be inserted in front of the placeholder to comply with the
+    " indentation. To determine whether the placeholder is the only word of the
+    " line, comparing the columns of the last character of the placeholder and
+    " of the last character of the line.
+    execute "normal! f#"
     let cursor_snippet = col('.')
-    execute "normal! ^"
-    let cursor_linestart = col('.')
+    execute "normal! $"
+    let cursor_lineend = col('.')
     silent call s:SnippetCursor(s:cur_repl)
 
     " Removing the placeholder before entering Insertion mode.
@@ -238,7 +239,7 @@ function! DoReplacement()
     " compulsory to set again v:char to something different from 0 to make sure
     " the cursor will be at the beginning of the placeholder no matter what key
     " the user then presses to enter Insertion mode.
-    if (cursor_snippet == cursor_linestart)
+    if (cursor_snippet == cursor_lineend)
         execute "normal! i \<Esc>l"
         let v:char = "no_cursor_automated_restoration"
     endif
@@ -281,10 +282,10 @@ function! SnippetInit(name)
     endif
     inoremap <silent> <Esc> <Esc>:call SnippetTerm()<CR>
 
-    if (!empty(maparg('<Esc>', "n", 0, 1)))
-        call add(s:map_save, maparg('<Esc>', "n", 0, 1))
+    if (!empty(maparg('<C-i>', "n", 0, 1)))
+        call add(s:map_save, maparg('<C-i>', "n", 0, 1))
     endif
-    nnoremap <silent> <Esc> <Esc>:call SnippetTerm()<CR>
+    nnoremap <silent> <C-i> :call SnippetTerm()<CR>
 
     if (!empty(maparg('<Tab>', "n", 0, 1)))
         call add(s:map_save, maparg('<Tab>', "n", 0, 1))
@@ -310,7 +311,7 @@ function! SnippetTerm()
     " Unmapping the script-scoped mappings created to perform the snippet
     " insertion.
     silent! nunmap <Tab>
-    silent! nunmap <Esc>
+    silent! nunmap <C-i>
     silent! iunmap <Esc>
 
     " Restoring the user's mappings, if any.
