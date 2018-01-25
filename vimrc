@@ -330,6 +330,16 @@ augroup filetype_c_and_cpp
     autocmd FileType c,cpp nnoremap <buffer> <localleader>gtf :YcmCompleter GoToDefinition<cr>
     " Go to include:
     autocmd FileType c,cpp nnoremap <buffer> <localleader>gti :YcmCompleter GoToInclude<cr>
+    " Mappings related to the vim-snippet plugin:
+    autocmd Filetype c,cpp inoremap <buffer> for<Tab> <Esc>:call SnippetInit('C/for.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> while<Tab> <Esc>:call SnippetInit('C/while.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> do<Tab> <Esc>:call SnippetInit('C/do.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> if<Tab> <Esc>:call SnippetInit('C/if.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> ?:<Tab> <Esc>:call SnippetInit('C/ternaire.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> switch<Tab> <Esc>:call SnippetInit('C/switch.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> case<Tab> <Esc>:call SnippetInit('C/case.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> hfile<Tab> <Esc>:call SnippetInit('C/header_file.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> hsect<Tab> <Esc>:call SnippetInit('C/header_section.c')<cr>
 augroup END
 " <------- }}}
 
