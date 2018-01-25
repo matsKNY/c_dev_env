@@ -102,15 +102,17 @@ augroup vim_mappings
     vnoremap <C-c> "+y
     inoremap <C-v> <esc>"+pi
     " Plugin-related remappings.
-    nmap <F8> :TagbarToggle<cr>
+    noremap <F8> :TagbarToggle<cr>
     " Laboratory notebook-related remappings.
-    nmap <F2> :call OpenLab("notebook.org")<cr>
-    nmap <F3> :call OpenLab("todo.org")<cr>
-    nmap <F4> :call OpenLab("references.org")<cr>
-    nmap <F5> :call OpenLab("knowledge.org")<cr>
-    nmap <F6> :call OpenLab("idea.org")<cr>
-    nmap <F7> :call OpenLab("writing.org")<cr>
-    nmap <F12> :! push_lab_notebook<cr>
+    noremap <F2> :call OpenLab("notebook.org")<cr>
+    noremap <F3> :call OpenLab("todo.org")<cr>
+    noremap <F4> :call OpenLab("references.org")<cr>
+    noremap <F5> :call OpenLab("knowledge.org")<cr>
+    noremap <F6> :call OpenLab("idea.org")<cr>
+    noremap <F7> :call OpenLab("writing.org")<cr>
+    noremap <F12> :! push_lab_notebook<cr>
+    " Comment-related mappings.
+    noremap <C-z> :call FilterCommentsOut()<cr>
 augroup END
 " <------- }}}
 
@@ -250,6 +252,67 @@ augroup functions_and_commands
         let home_path = fnamemodify(expand("$HOME"), ":p:h")
         let file_path = home_path . "/.lab_notebook/" . a:file
         execute "e " . file_path
+    endfunction
+
+    " Opens a temporary buffer to display the current file without any full-line
+    " comments.
+    function! FilterCommentsOut()
+        " Storing the current position of the cursor so as to restore it in the
+        " temporary buffer.
+        let init_line = line('.')
+        let init_col  = col('.')
+        
+        " Copying the original buffer to a temporary one in order to modify it
+        " without actually modifying the original buffer.
+        setlocal hidden
+        execute "normal ggVGy"
+        execute "e filter_comments_out-" . expand('%:t')
+        setlocal buftype=nofile
+        execute "normal pggdd^"
+
+        " The position the cursor should be set to is going to evolve with line
+        " deletions.
+        let cursor_line = init_line
+        let nb_deletion = 0
+
+        " Iterating over all the lines of the file.
+        let count_line = 1
+        let nb_lines   = line('$')
+        while (count_line <= nb_lines)
+            " Making sure to be at the beginning of the line.
+            execute "normal! ^"
+            " Determining the syntax group of the first character.
+            " Indeed, since the goal of the function is to filter out the
+            " comment lines, it is sufficient to determine the syntax group of
+            " the first character.
+            let highlight_group = synIDattr(synID(line('.'), col('.'), 1), 'name')
+
+            " If the line belong to the syntax group of the comments, deleting
+            " it.
+            " Since it modifies the total number of lines, "nb_line" must be
+            " updated.
+            " However, since the next line before deletion becomes the curretn
+            " line after deletion, "count_line" should not be updated.
+            if (highlight_group =~ ".*comment.*")
+                execute "normal! dd^"
+                let nb_lines = nb_lines - 1
+
+                " Updating the line the cursor should be put to in the temporary
+                " buffer - taking into account line deletion.
+                let nb_deletion = nb_deletion + 1
+                if (init_line >= (nb_deletion + count_line))
+                    let cursor_line = cursor_line - 1
+                endif
+            else
+                execute "normal! j^"
+                let count_line = count_line + 1
+            endif
+        endwhile
+
+        " Positioning the cursor to its last known position in the original
+        " buffer.
+        call cursor(cursor_line, init_col)
+
     endfunction
 
 augroup END
