@@ -108,7 +108,7 @@ augroup vim_mappings
     noremap <F3> :call OpenLab("todo.org")<cr>
     noremap <F4> :call OpenLab("references.org")<cr>
     noremap <F5> :call OpenLab("knowledge.org")<cr>
-    noremap <F6> :call OpenLab("idea.org")<cr>
+    noremap <F6> :call OpenLab("ideas.org")<cr>
     noremap <F7> :call OpenLab("writing.org")<cr>
     noremap <F12> :! push_lab_notebook<cr>
     " Comment-related mappings.
