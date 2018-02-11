@@ -112,7 +112,7 @@ augroup vim_mappings
     noremap <F7> :call OpenLab("writing.org")<cr>
     noremap <F12> :! push_lab_notebook<cr>
     " Comment-related mappings.
-    noremap <C-z> :call FilterCommentsOut()<cr>
+    noremap <C-e> :call FilterCommentsOut()<cr>
 augroup END
 " <------- }}}
 
@@ -315,6 +315,14 @@ augroup functions_and_commands
 
     endfunction
 
+    function! OrgmodeSyntaxHighlight()
+        let dictHighlight = {'bash': 'sh', 'fortran': 'fortran'}
+
+        for key in keys(dictHighlight)
+            call SyntaxRange#Include('#+BEGIN_SRC ' . key, '#+END_SRC', dictHighlight[key], 'NonText')
+        endfor
+    endfunction
+
 augroup END
 " <------- }}}
 
@@ -362,6 +370,7 @@ augroup END
 " Filetype - Orgmode -------> {{{
 augroup filetype_orgmode
     autocmd!
+    autocmd Filetype org call OrgmodeSyntaxHighlight()
     autocmd Filetype org let g:loaded_youcompleteme = 1
     autocmd Filetype org let maplocalleader = "/"
     autocmd Filetype org let g:org_todo_keywords = [
@@ -369,8 +378,8 @@ augroup filetype_orgmode
                 \ ['ZERO(z)', 'DEV(s)', 'COMPILING(c)', 'VALIDATED(v)', '|', 'MERGED(m)'],
                 \ ['REPORTED(r)', 'ISOLATED(i)', '|', 'FIXED(f)']
     \]
-    autocmd Filetype org nmap <F9> :call ListTags()<cr>
-    autocmd Filetype org nmap <F10> :call FilterTags()<cr>
+    autocmd Filetype org noremap <F9> :call ListTags()<cr>
+    autocmd Filetype org noremap <F10> :call FilterTags()<cr>
 augroup END
 " <------- }}}
 
