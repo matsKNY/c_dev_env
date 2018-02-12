@@ -54,9 +54,9 @@ function check_ura {
     local URA="$(cat ~/.is_ura_on)"
 
     if [[ "$URA" == "yes" ]] ; then
-        local URA="\033[1;38;5;160m(URA)\033[00m"
+        local URA="\001\033[1;38;5;160m\002(URA)\001\033[00m\002"
     else
-        local URA="\033[1;38;5;240m(no URA)\033[00m"
+        local URA="\001\033[1;38;5;240m\002(no URA)\001\033[00m\002"
     fi
 
     echo -e "$URA"
@@ -67,9 +67,9 @@ function check_ura {
 function check_proxy {
 
     if [[ ! -z "$http_proxy" ]] ; then
-        local proxy="\033[1;38;5;34m(proxy)\033[00m"
+        local proxy="\001\033[1;38;5;34m\002(proxy)\001\033[00m\002"
     else
-        local proxy="\033[1;38;5;240m(no proxy)\033[00m"
+        local proxy="\001\033[1;38;5;240m\002(no proxy)\001\033[00m\002"
     fi
 
     echo -e "$proxy"
@@ -77,7 +77,7 @@ function check_proxy {
 
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1="\n\r\[\033[0;38;5;99m\]\u\[\033[00m\]@\[\033[1;38;5;69m\]\h\[\033[00m\]: \t | \$(check_ura) | \$(check_proxy) | \[\033[0;38;5;117m\]\w\[\033[00m\]\n\r        |\n\r        ↳ "
+    PS1="\n\r\[\033[0;38;5;99m\]\u\[\033[00m\]@\[\033[1;38;5;69m\]\h\[\033[00m\]: \t | \$(check_ura) | \$(check_proxy) | \[\033[0;38;5;117m\]\w\[\033[00m\]\n\r        |\[\n\]\[\r\]        ↳ "
 else
     PS1='${debian_chroot:+(debian_chroot)}\u@\h:\w\$ '
 fi
