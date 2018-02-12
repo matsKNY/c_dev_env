@@ -49,9 +49,35 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Defining a function to dynamically check whether the URA mode is set or not.
+function check_ura {
+    local URA="$(cat ~/.is_ura_on)"
+
+    if [[ "$URA" == "yes" ]] ; then
+        local URA="\033[1;38;5;160m(URA)\033[00m"
+    else
+        local URA="\033[1;38;5;240m(no URA)\033[00m"
+    fi
+
+    echo -e "$URA"
+}
+
+# Defining a function to dynamically check whether the global variables related
+# to the HTTP proxy are defined or not.
+function check_proxy {
+
+    if [[ ! -z "$http_proxy" ]] ; then
+        local proxy="\033[1;38;5;34m(proxy)\033[00m"
+    else
+        local proxy="\033[1;38;5;240m(no proxy)\033[00m"
+    fi
+
+    echo -e "$proxy"
+}
+
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='${debian_chroot:+(debian_chroot)}\n\r\[\033[34m\]\u\[\033[00m\]@\[\033[01;34m\]\h\[\033[00m\]: \t | \[\033[1;30m\]\w\[\033[00m\]\n\r        |\n\r        ↳ \[\033[00;37m\]'
+    PS1="\n\r\[\033[0;38;5;99m\]\u\[\033[00m\]@\[\033[1;38;5;69m\]\h\[\033[00m\]: \t | \$(check_ura) | \$(check_proxy) | \[\033[0;38;5;117m\]\w\[\033[00m\]\n\r        |\n\r        ↳ "
 else
     PS1='${debian_chroot:+(debian_chroot)}\u@\h:\w\$ '
 fi
@@ -117,3 +143,12 @@ xmodmap -e "keycode  32 = o O o O oe OE"
 
 # Defining the path to the laboratory notebook.
 export LAB_NOTEBOOK="${HOME}/.lab_notebook"
+
+# Functions related to the HTTP proxy of the Atos network.
+function source_http_proxy {
+    source /usr/local/bin/source_http_proxy
+}
+
+function unsource_http_proxy {
+    source /usr/local/bin/unsource_http_proxy
+}
