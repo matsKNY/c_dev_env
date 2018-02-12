@@ -315,11 +315,16 @@ augroup functions_and_commands
 
     endfunction
 
+    " Applies proper syntax highlighting in .org files (for vim-orgmode plugin) 
+    " to no-default programming languages.
     function! OrgmodeSyntaxHighlight()
+        " Defining a dictionary containing all the programming languages for
+        " which the syntax should be highlighted.
         let dictHighlight = {'bash': 'sh', 'fortran': 'fortran'}
 
+        " Iterating over all the programming languages to highlight.
         for key in keys(dictHighlight)
-            call SyntaxRange#Include('#+BEGIN_SRC ' . key, '#+END_SRC', dictHighlight[key], 'NonText')
+            silent! call SyntaxRange#Include('#+BEGIN_SRC ' . key, '#+END_SRC', dictHighlight[key], 'NonText')
         endfor
     endfunction
 
