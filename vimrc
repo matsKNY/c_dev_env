@@ -58,6 +58,8 @@ augroup vundle_plugins
     Plugin 'majutsushi/tagbar'
     " Managing the SyntaxRange plugin.
     Plugin 'vim-scripts/SyntaxRange'
+    " Managing the IndentLine plugin.
+    Plugin 'Yggdroot/indentLine'
 
     " Terminating Vundle.
     call vundle#end()
