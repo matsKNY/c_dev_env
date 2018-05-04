@@ -75,8 +75,12 @@ function check_proxy {
     echo -e "$proxy"
 }
 
+### Alternative prompt for remote servers (pseudo-random colors for user and
+### host names, so as to differentiate the terminals).
+#HOSTNAME_PROMPT="$(print-color "$(hostname)")"
+#USERNAME_PROMPT="$(print-color "$(whoami)")"
 if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1="\[\n\]\[\r\]${USERNAME_PROMPT}@${HOSTNAME_PROMPT}: \t | \[\033[0;38;5;117m\]\w\[\033[00m\]\[\n\]\[\r\]        |\[\n\]\[\r\]        \[↳\] "
     PS1="\[\n\]\[\r\]\[\033[0;38;5;99m\]\u\[\033[00m\]@\[\033[1;38;5;69m\]\h\[\033[00m\]: \t | \$(check_ura) | \$(check_proxy) | \[\033[0;38;5;117m\]\w\[\033[00m\]\[\n\]\[\r\]        |\[\n\]\[\r\]        \[↳\] "
 else
     PS1='${debian_chroot:+(debian_chroot)}\u@\h:\w\$ '

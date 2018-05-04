@@ -46,6 +46,7 @@ install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 bash_aliases "$DIR_INSTALL"
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 git_template "$DIR_INSTALL"/.git_template
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 ls_colors "$DIR_INSTALL"/.ls_colors
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 vimrc "$DIR_INSTALL"/.vimrc
+install -o "root" -g "root" -m 755 print-color /usr/local/bin/print-color
 
 # Creating the directory dedicated to the laboratory notebook.
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.lab_notebook

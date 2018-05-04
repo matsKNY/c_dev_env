@@ -1,0 +1,78 @@
+#! /bin/bash
+
+# If anything fail, the execution of the script stops.
+#set -eo pipefail
+
+### Defining variables.
+## Return codes.
+EXIT_SUCCESS=0
+EXIT_FAILURE=1
+
+## Color codes.
+ECHO_DEFAULT='\033[00m'
+ECHO_COLORS=( \
+    '\033[1;38;5;246m' '\033[1;38;5;33m' '\033[0;38;5;208m' \
+    '\033[0;38;5;227m' '\033[1;38;5;117m' '\033[1;38;5;169m' \
+    '\033[0;38;5;49m' '\033[0;38;5;255m' '\033[0;38;5;196m' \
+    '\033[0;38;5;40m' \
+)
+
+## Color-related parameters.
+# Number of colors.
+ECHO_NB_COLORS="${#ECHO_COLORS[@]}"
+# ID of the last color.
+ECHO_LAST_COLOR=0
+let "ECHO_LAST_COLOR = ECHO_NB_COLORS - 1"
+
+## Prime numbers-related parameters.
+# Prime numbers table.
+PRIME_TABLE=( 7 17 37 47 67 71 73 79 97 )
+# Number of prime numbers.
+PRIME_NB="${#PRIME_TABLE[@]}"
+# ID of the last prime number.
+PRIME_LAST=0
+let "PRIME_LAST = PRIME_NB - 1"
+
+### Defining functions.
+## Gets the ASCII code associated with a character.
+function get_ascii_code {
+    LC_CTYPE=C printf "%d" "'$1"
+}
+
+## Computes the color ID associated with the supplied word.
+function compute_color_id {
+    # Adjusting the size of the string to remove the newline character.
+    local string_size="${#1}"
+    let "string_size = string_size - 1"
+    # Declaring a variable to compute the color ID.
+    local color_id=0
+    # Iterating over all the characters of the supplied input string.
+    for char in $(seq 0 1 "$string_size") ; do
+        # Getting the ASCII code associated with the current character.
+        local ascii="$(get_ascii_code ${1:${char}:1})"
+        # Getting the prime number associated with the current character.
+        local prime_id=0
+        let "prime_id = char % PRIME_NB"
+        local prime="${PRIME_TABLE[${prime_id}]}"
+        # Adding the value associated with the character to the color_id
+        # variable.
+        let "color_id = color_id + char*prime*ascii"
+    done
+
+    # Adjusting the value of color_id.
+    let "color_id = color_id % ECHO_NB_COLORS"
+
+    # Returning the ID of the color associated with the supplied string.
+    echo "$color_id"
+}
+
+## Prints the supplied string with the specified color.
+function print_color {
+    echo -e "${ECHO_COLORS[${2}]}${1}${ECHO_DEFAULT}"
+}
+
+### CLI.
+print_color "$1" "$(compute_color_id "$1")"
+
+# Terminating the script.
+exit "$EXIT_SUCCESS"
