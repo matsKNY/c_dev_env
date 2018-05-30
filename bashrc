@@ -148,11 +148,13 @@ xmodmap -e "keycode  32 = o O o O oe OE"
 # Defining the path to the laboratory notebook.
 export LAB_NOTEBOOK="${HOME}/.lab_notebook"
 
-# Functions related to the HTTP proxy of the Atos network.
-function source_http_proxy {
-    source /usr/local/bin/source_http_proxy
-}
+# Functions related to the use of the "script" command.
+function print_manuscript {
+    echo -e "\n##############################################################\n"
 
-function unsource_http_proxy {
-    source /usr/local/bin/unsource_http_proxy
+    while IFS='' read line || [[ -n "$line" ]] ; do
+        echo -e "\t\t#\t${line}"  
+    done < "$1"
+
+    echo -e "\n##############################################################\n"
 }
