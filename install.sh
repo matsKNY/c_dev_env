@@ -16,21 +16,40 @@ if [[ ! -d "$DIR_INSTALL" ]]; then
     exit 1
 fi
 
-# Installing Vim.
-apt-get update && \
+# Updating the apt repositories, and installing basic packages.
+apt-get update -y
     apt-get install sudo -y && \
-    apt-get install vim-gnome -y && \
     apt-get install curl wget -y && \
     apt-get install screen -y
 
-# Installing the compilation toolchain, git, Python and Valgrind.
+# Installing the compilation toolchain, git, Python, R and Valgrind.
 apt-get install build-essential -y && \
     apt-get install python3 python-dev python3-dev python3-all -y && \
     apt-get install gcc -y && \
     apt-get install g++ -y && \
     apt-get install automake make cmake -y && \
     apt-get install git -y && \
+    apt-get install r-base -y && \
     apt-get install valgrind valgrind-dbg valkyrie -y
+
+# Installing pip.
+apt-get install python3-pip -y && pip3 install --upgrade pip
+
+# Installing NeoVim.
+apt-get install ninja-build gettext libtool libtool-bin autoconf -y && \
+    apt-get install pkg-config unzip -y 
+git clone https://github.com/neovim/neovim.git
+cd neovim
+git checkout v0.2.2
+make CMAKE_BUILD_TYPE=RelWithDebInfo
+make install
+pip3 install --upgrade neovim
+cd .. && rm -fr neovim
+
+### Installing R modules.
+# Colorout.
+git clone https://github.com/jalvesaq/colorout.git && \
+    R CMD INSTALL colorout && rm -fr colorout
 
 # Retrieving, compiling and installing universal-ctags, which will be needed by 
 # vim-orgmode.                                                                  
@@ -70,12 +89,17 @@ install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 vim-plugins/vim-snippet/sni
 # Creating Vim's bundle directory.
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.vim/bundle/
 
+# Installing the configuration file of NeoVim (over Vim).
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.config/
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -d "$DIR_INSTALL"/.config/nvim
+install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 init.vim "$DIR_INSTALL"/.config/nvim/init.vim
+
 # Cloning the repository of Vundle in order to install all the plugins 
 # (including itself) easily.
 git clone https://github.com/VundleVim/Vundle.vim.git "$DIR_INSTALL"/.vim/bundle/Vundle.vim
 
 # Launching the installation of the Vim plugins.
-vim +PluginInstall +qall
+nvim +PluginInstall +qall
 
 # Compiling and completing the installation of YCM.
 cd "$DIR_INSTALL"/.vim/bundle/YouCompleteMe && \
