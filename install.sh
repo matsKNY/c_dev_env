@@ -17,7 +17,8 @@ if [[ ! -d "$DIR_INSTALL" ]]; then
 fi
 
 # Updating the apt repositories, and installing basic packages.
-apt-get update -y
+apt-get update -y && apt upgrade -y && \
+    apt-get install vim -y && \
     apt-get install sudo -y && \
     apt-get install curl wget -y && \
     apt-get install screen -y
@@ -40,7 +41,7 @@ apt-get install ninja-build gettext libtool libtool-bin autoconf -y && \
     apt-get install pkg-config unzip -y 
 git clone https://github.com/neovim/neovim.git
 cd neovim
-git checkout v0.2.2
+git checkout v0.3.1
 make CMAKE_BUILD_TYPE=RelWithDebInfo
 make install
 pip3 install --upgrade neovim
