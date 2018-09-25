@@ -60,6 +60,10 @@ augroup vundle_plugins
     Plugin 'vim-scripts/SyntaxRange'
     " Managing the IndentLine plugin.
     Plugin 'Yggdroot/indentLine'
+    " Managing the R plugin.
+    Plugin 'jalvesaq/Nvim-R'
+    " Managing the fugitive plugin.
+    Plugin 'tpope/vim-fugitive'
 
     " Terminating Vundle.
     call vundle#end()
@@ -71,6 +75,8 @@ augroup theme
     autocmd!
     set t_Co=256
     silent! colorscheme molokai
+    hi MatchParen cterm=none ctermbg=black ctermfg=81
+    set nohlsearch
 augroup END
 " <------- }}}
 
@@ -85,6 +91,7 @@ augroup vim_mappings
     inoremap ² <del>
     inoremap ¬ ²
     inoremap ù %
+    inoremap ↓ ù
     inoremap § <down>
     inoremap % <left>
     inoremap µ <right>
@@ -104,7 +111,7 @@ augroup vim_mappings
     vnoremap <C-c> "+y
     inoremap <C-v> <esc>"+pi
     " Plugin-related remappings.
-    noremap <F8> :TagbarToggle<cr>
+    noremap <F8> :TagbarOpenAutoClose<cr>
     " Laboratory notebook-related remappings.
     noremap <F2> :call OpenLab("notebook.org")<cr>
     noremap <F3> :call OpenLab("todo.org")<cr>
@@ -124,6 +131,7 @@ augroup filetype_global
     filetype plugin indent on
     filetype plugin on
     filetype on
+    set fdm=marker
 augroup END
 " <------- }}}
 
