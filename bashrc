@@ -49,39 +49,13 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-# Defining a function to dynamically check whether the URA mode is set or not.
-function check_ura {
-    local URA="$(cat ~/.is_ura_on)"
-
-    if [[ "$URA" == "yes" ]] ; then
-        local URA="\001\033[1;38;5;160m\002(URA)\001\033[00m\002"
-    else
-        local URA="\001\033[1;38;5;240m\002(no URA)\001\033[00m\002"
-    fi
-
-    echo -e "$URA"
-}
-
-# Defining a function to dynamically check whether the global variables related
-# to the HTTP proxy are defined or not.
-function check_proxy {
-
-    if [[ ! -z "$http_proxy" ]] ; then
-        local proxy="\001\033[1;38;5;34m\002(proxy)\001\033[00m\002"
-    else
-        local proxy="\001\033[1;38;5;240m\002(no proxy)\001\033[00m\002"
-    fi
-
-    echo -e "$proxy"
-}
-
 ### Alternative prompt for remote servers (pseudo-random colors for user and
 ### host names, so as to differentiate the terminals).
 #HOSTNAME_PROMPT="$(print-color "$(hostname)")"
 #USERNAME_PROMPT="$(print-color "$(whoami)")"
 if [ "$color_prompt" = yes ]; then
     #PS1="\[\n\]\[\r\]${USERNAME_PROMPT}@${HOSTNAME_PROMPT}: \t | \[\033[0;38;5;117m\]\w\[\033[00m\]\[\n\]\[\r\]        |\[\n\]\[\r\]        \[↳\] "
-    PS1="\[\n\]\[\r\]\[\033[0;38;5;99m\]\u\[\033[00m\]@\[\033[1;38;5;69m\]\h\[\033[00m\]: \t | \$(check_ura) | \$(check_proxy) | \[\033[0;38;5;117m\]\w\[\033[00m\]\[\n\]\[\r\]        |\[\n\]\[\r\]        \[↳\] "
+    PS1="\[\n\]\[\r\]\[\033[0;38;5;99m\]\u\[\033[00m\]@\[\033[1;38;5;69m\]\h\[\033[00m\]: \t | \[\033[0;38;5;117m\]\w\[\033[00m\]\[\n\]\[\r\]        |\[\n\]\[\r\]        \[↳\] "
 else
     PS1='${debian_chroot:+(debian_chroot)}\u@\h:\w\$ '
 fi
