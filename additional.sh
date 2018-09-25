@@ -8,6 +8,6 @@ fi
 
 # Updating the apt repositories, and installing basic packages.
 apt-get update -y && apt upgrade -y && \
-    apt get -y htop && \
-    apt get -y pdftk && \
-    apt get -y texlive-full texlive-xetex
+    apt install -y htop && \
+    apt install -y pdftk && \
+    apt install -y texlive-full texlive-xetex
