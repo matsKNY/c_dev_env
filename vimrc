@@ -395,6 +395,7 @@ augroup filetype_orgmode
     \]
     autocmd Filetype org noremap <F9> :call ListTags()<cr>
     autocmd Filetype org noremap <F10> :call FilterTags()<cr>
+    autocmd Filetype org hi! link org_bold User2
 augroup END
 " <------- }}}
 
