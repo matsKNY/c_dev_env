@@ -60,6 +60,14 @@ cd ctags
 cd ..
 rm -fr ctags
 
+# Retrieving, compiling and installing Criterion - for C unit testing:
+git clone https://github.com/Snaipe/Criterion.git
+cd Criterion && git checkout v2.3.2
+mkdir build && cd build
+cmake .. && make && make install && ldconfig
+cd ../..
+rm -fr Criterion
+
 # Copying the bashrc, the bash_aliases, ls_colors and vimrc files.
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 bashrc "$DIR_INSTALL"/.bashrc
 install -o "$USER_INSTALL" -g "$USER_INSTALL" -m 644 bash_aliases "$DIR_INSTALL"/.bash_aliases
