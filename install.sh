@@ -36,6 +36,10 @@ apt-get install build-essential -y && \
 # Installing pip.
 apt-get install python3-pip -y && pip3 install --upgrade pip
 
+# Updating the setuptools package of pip, then installing some Python packages:
+pip install --upgrade setuptools &&
+    pip install cairocffi PyPDF2
+
 # Installing NeoVim.
 apt-get install ninja-build gettext libtool libtool-bin autoconf -y && \
     apt-get install pkg-config unzip -y 

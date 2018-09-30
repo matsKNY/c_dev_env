@@ -10,7 +10,8 @@ fi
 apt-get update -y && apt upgrade -y && \
     apt install -y htop && \
     apt install -y pdftk && \
-    apt install -y texlive-full texlive-xetex
+    apt install -y texlive-full texlive-xetex && \
+    apt install -y inkscape
 
 # Youtube-DL:
 apt install -y ffmpeg libsox-fmt-mp3
