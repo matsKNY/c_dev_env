@@ -7,6 +7,7 @@ augroup general_vim_settings
     set showmode
     set backspace=indent,eol,start
     set encoding=utf-8
+    set guicursor=
     syntax on
 augroup END
 " <------- }}}
@@ -142,7 +143,7 @@ augroup functions_and_commands
     " Function and associated command to open a PDF from its path in Vim:
     function! Function_OpenPDF()
         let line=getline('.')
-        execute "!evince " . line
+        execute "!okular " . line
     endfunction
     "
     command! OpenPDF call Function_OpenPDF()
