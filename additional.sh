@@ -7,7 +7,8 @@ if [[ "$EUID" -ne 0 ]]; then
 fi
 
 # Updating the apt repositories, and installing basic packages.
-apt-get update -y && apt upgrade -y && \
+apt update -y && apt upgrade -y && \
+    apt install -y tig && \
     apt install -y htop && \
     apt install -y pdftk && \
     apt install -y texlive-full texlive-xetex && \

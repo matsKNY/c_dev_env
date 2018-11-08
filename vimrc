@@ -89,16 +89,9 @@ augroup vim_mappings
     " Text editing mappings
     inoremap <esc> <nop>
     inoremap jk <esc>
-    inoremap ² <del>
-    inoremap ¬ ²
     inoremap ù %
-    inoremap ↓ ù
-    inoremap § <down>
-    inoremap % <left>
-    inoremap µ <right>
-    inoremap £ <up>
+    inoremap % ù
     " Unicode-related mappings.
-    inoremap <C-u> <C-V>
     inoremap <C-l> <C-V>u2937 
     " New lines mappings
     nnoremap <leader>o o<esc>^
@@ -122,7 +115,7 @@ augroup vim_mappings
     noremap <F7> :call OpenLab("writing.org")<cr>
     noremap <F12> :! push_lab_notebook<cr>
     " Comment-related mappings.
-    noremap <C-e> :call FilterCommentsOut()<cr>
+    noremap <C-f> :call FilterCommentsOut()<cr>
 augroup END
 " <------- }}}
 
@@ -355,15 +348,8 @@ augroup filetype_c_and_cpp
     " Go to include:
     autocmd FileType c,cpp nnoremap <buffer> <localleader>gti :YcmCompleter GoToInclude<cr>
     " Mappings related to the vim-snippet plugin:
-    autocmd Filetype c,cpp inoremap <buffer> for<Tab> <Esc>:call SnippetInit('C/for.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> while<Tab> <Esc>:call SnippetInit('C/while.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> do<Tab> <Esc>:call SnippetInit('C/do.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> if<Tab> <Esc>:call SnippetInit('C/if.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> ?:<Tab> <Esc>:call SnippetInit('C/ternaire.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> switch<Tab> <Esc>:call SnippetInit('C/switch.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> case<Tab> <Esc>:call SnippetInit('C/case.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> hfile<Tab> <Esc>:call SnippetInit('C/header_file.c')<cr>
-    autocmd Filetype c,cpp inoremap <buffer> hsect<Tab> <Esc>:call SnippetInit('C/header_section.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> <leader>hf <Esc>:call SnippetInit('C/header_file.c')<cr>
+    autocmd Filetype c,cpp inoremap <buffer> <leader>hs <Esc>:call SnippetInit('C/header_section.c')<cr>
 augroup END
 " <------- }}}
 
@@ -390,9 +376,7 @@ augroup filetype_orgmode
     autocmd Filetype org let g:loaded_youcompleteme = 1
     autocmd Filetype org let maplocalleader = "/"
     autocmd Filetype org let g:org_todo_keywords = [
-                \ ['TODO(t)', 'WIP(w)', '|', 'DONE(d)'],
-                \ ['ZERO(z)', 'DEV(s)', 'COMPILING(c)', 'VALIDATED(v)', '|', 'MERGED(m)'],
-                \ ['REPORTED(r)', 'ISOLATED(i)', '|', 'FIXED(f)']
+        \ ['TODO(t)', 'WIP(w)', '|', 'DONE(d)']
     \]
     autocmd Filetype org noremap <F9> :call ListTags()<cr>
     autocmd Filetype org noremap <F10> :call FilterTags()<cr>

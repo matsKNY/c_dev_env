@@ -15,6 +15,12 @@ augroup nvim_mappings
     command! OpenTerm call Function_OpenTerm(10)
 augroup END
 
+" Configuration of nvim-R:
+augroup nvim_R
+    autocmd!
+    let vimrplugin_assign = 0
+augroup END
+
 " Adapting the theme associated with emulated terminals.
 augroup Terminal
     autocmd!

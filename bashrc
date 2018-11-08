@@ -107,18 +107,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# Vim edition mode in Bash! With the AltGr+J key combination remapped to 
-# Escape to navigate between normal and insertion modes.
-set -o vi
-xmodmap -e "keycode  44 = j J j J Escape"
-# To revert the mapping, uncomment the below line.
-#xmodmap -e "keycode  44 = j J j J dead_hook dead_horn"
-
-# Remapping the keyboard in order to assign œ to AltGr+o and Œ to Shift+AltGr+o.
-xmodmap -e "keycode  32 = o O o O oe OE"
-# To revert the mapping, uncomment the below line.
-#xmodmap -e "keycode  32 = o O o O oslash Oslash"
-
 # Defining the path to the laboratory notebook.
 export LAB_NOTEBOOK="${HOME}/.lab_notebook"
 
