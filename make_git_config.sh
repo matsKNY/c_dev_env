@@ -95,7 +95,7 @@ fi
 echo "
 [alias]
     lg = \"log --color --oneline --graph --date=short \
---pretty=format:'%C(yellow)%h%Creset => %<(55) %s by %C(bold blue)%<(20)%an%Creset on %Cgreen(%cd)%Creset'\"
+--pretty=format:'%C(yellow)%h%Creset => %<(85) %s by %C(bold blue)%<(20)%an%Creset on %Cgreen(%cd)%Creset'\"
 [color]
 	branch = true
 	diff = true
