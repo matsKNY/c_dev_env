@@ -65,6 +65,8 @@ augroup vundle_plugins
     Plugin 'jalvesaq/Nvim-R'
     " Managing the fugitive plugin.
     Plugin 'tpope/vim-fugitive'
+    " Managing the jedi plugin.
+    Plugin 'davidhalter/jedi-vim'
 
     " Terminating Vundle.
     call vundle#end()
@@ -116,6 +118,12 @@ augroup vim_mappings
     noremap <F12> :! push_lab_notebook<cr>
     " Comment-related mappings.
     noremap <C-f> :call FilterCommentsOut()<cr>
+    " Windows-management related mappings:
+    noremap w <C-w>
+    noremap ww <C-w>w
+    " Tab-management related mappings:
+    noremap gr gT
+    noremap ge :tabnew<cr>
 augroup END
 " <------- }}}
 
